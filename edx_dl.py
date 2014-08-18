@@ -96,7 +96,8 @@ class EdXBrowser(object):
                         continue
 
                 i += 1
-                courseware_url = re.sub(r'\/info$','/courseware',course_url)
+                #from git short_path=04c6e90 courseware_url = re.sub(r'\/info$','/courseware',course_url)
+		courseware_url = re.sub(r'\/(info|syllabus)$','/courseware',course_url)
                 self.courses.append({'name':course_name, 'url':courseware_url})
                 print '[%02i] %s' % (i, course_name)
 
@@ -171,6 +172,24 @@ class EdXBrowser(object):
                         sanitize_filename(chapter_name, replace_space_with_underscore),
                         '%02i.%02i.%02i ' % (i,j,k) + \
                         sanitize_filename('%s (%s)' % (par_name, video_type), replace_space_with_underscore) + '.%(ext)s')
+                    #
+                    #print "Debug me pause- %s"  % self._config.pause_mode
+                    #print "Debug me resume- %s"  % self._config.resume_mode
+                    if self._config.pause_mode:
+                        launch_download_msg = 'Download this video [%s - %s]? (y/n) ' % (chapter_name, outtmpl)
+                        launch_download = raw_input(launch_download_msg)
+                        if (launch_download.lower() == "n"):
+                            continue
+
+                    if self._config.resume_mode:
+                        launch_download_msg = 'Download video from this [%s - %s]? (y/n) ' % (chapter_name, outtmpl)
+                        launch_download = raw_input(launch_download_msg)
+                        if (launch_download.lower() == "n"):
+                            continue
+                        else:
+                            self._config.resume_mode = False
+                    #
+                    #
                     self._fd.params['outtmpl'] = outtmpl
                     self._fd.download([video_url])
                 except Exception as e:
@@ -182,6 +201,19 @@ if __name__ == '__main__':
 
     if config.interactive_mode:
         sys.argv.remove('--interactive')
+
+    #
+    config.pause_mode = ('--pause' in sys.argv)
+
+    if config.pause_mode:
+        sys.argv.remove('--pause')
+
+    config.resume_mode = ('--resume' in sys.argv)
+
+    if config.resume_mode:
+        sys.argv.remove('--resume')
+
+    #
 
     if len(sys.argv) >= 2:
         DIRECTORY = sys.argv[-1].strip('"')

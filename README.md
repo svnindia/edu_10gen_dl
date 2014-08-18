@@ -1,6 +1,6 @@
 # EdX powered courses video downloader
 
-This script is intended to download course videos from http://education.10gen.com
+This script is intended to download course videos from http://university.mongodb.com
 or any other site 'Powered by EdX' (including, of course, http://edx.org itself).
 
 This script relies on [youtube-dl](https://github.com/rg3/youtube-dl/) project
@@ -17,7 +17,7 @@ Accepts destination path as optional parameter.
 
 ### Installation
 
-    git clone https://github.com/nonsleepr/edu_10gen_dl.git
+    git clone https://github.com/svnindia/edu_10gen_dl.git
     cd edu_10gen_dl
     sudo pip install -r requirements.txt
 
@@ -29,4 +29,9 @@ Optionally set another options in `config.py` like `writesubtitles` to enable su
 
 + `python edx_dl.py`
 + `python edx_dl.py c:\Users\MyUser\Lectures\`
+To Download all the videos from the Course chapter
 + `python edx_dl.py --interactive c:\Users\MyUser\Lectures\`
+To Download the specipfic videos from the Course chapter, for each video Download Permission asked
++ `python edx_dl.py --interactive --pause /home/svnindia/Downloads/tut_edx/`
+To Download all the videos from the Course chapter from the broken download.Because of some reasons we may not able to downloaded all the videos in that case we can make use of the below
++ `python edx_dl.py --interactive --resume /home/svnindia/Downloads/tut_edx/`
