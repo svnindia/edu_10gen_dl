@@ -28,10 +28,11 @@ Optionally set another options in `config.py` like `writesubtitles` to enable su
 ### Usage:
 
 + `python edx_dl.py`
+
 + `python edx_dl.py c:\Users\MyUser\Lectures\`
-To Download all the videos from the Course chapter
-+ `python edx_dl.py --interactive c:\Users\MyUser\Lectures\`
-To Download the specipfic videos from the Course chapter, for each video Download Permission asked
-+ `python edx_dl.py --interactive --pause /home/svnindia/Downloads/tut_edx/`
-To Download all the videos from the Course chapter from the broken download.Because of some reasons we may not able to downloaded all the videos in that case we can make use of the below
-+ `python edx_dl.py --interactive --resume /home/svnindia/Downloads/tut_edx/`
+
++ `python edx_dl.py --interactive c:\Users\MyUser\Lectures\` To Download all the videos from the Course chapter
+
++ `python edx_dl.py --interactive --pause /home/svnindia/Downloads/tut_edx/` To Download the specipfic videos from the Course chapter, for each video Download Permission asked
+
++ `python edx_dl.py --interactive --resume /home/svnindia/Downloads/tut_edx/` To Download all the videos from the Course chapter from the broken download.Because of some reasons we may not able to downloaded all the videos in that case we can make use of the below
