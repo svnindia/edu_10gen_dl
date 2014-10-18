@@ -83,7 +83,7 @@ class EdXBrowser(object):
         if self._logged_in:
             dashboard = self._br.open(base_url + dashboard_url)
             dashboard_soup = BeautifulSoup(dashboard.read())
-            my_courses = dashboard_soup.findAll('article', 'my-course')
+            my_courses = dashboard_soup.findAll('div', 'media')
             i = 0
             for my_course in my_courses:
                 course_url = my_course.a['href']
@@ -109,10 +109,11 @@ class EdXBrowser(object):
             course_name = course['name']
             courseware = self._br.open(base_url+course['url'])
             courseware_soup = BeautifulSoup(courseware.read())
-            chapters = courseware_soup.findAll('div','chapter')
+            chapters = courseware_soup.findAll('li', 'accordion-caret')
+
             i = 0
             for chapter in chapters:
-                chapter_name = chapter.find('h3').find('a').text
+                chapter_name = chapter.find('strong').find('a').text
 
                 if self._config.interactive_mode:
                     launch_download_msg = 'Download the chapter [%s - %s]? (y/n) ' % (course_name, chapter_name)
